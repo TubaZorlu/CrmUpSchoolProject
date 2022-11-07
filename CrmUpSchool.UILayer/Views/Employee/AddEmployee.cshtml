@@ -1,0 +1,32 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "AddEmployee";
+    Layout = "~/Views/Shared/_CRMLayout.cshtml";
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<h1>Yeni personel</h1>
+
+<form method="post">
+    <label>Perosnel Adı</label>
+    <input type="text" asp-for="EmployeeName" class="form-control" />
+    <span asp-validation-for="EmployeeName" class="text-danger"></span>
+    <br />
+    <label>Perosnel Soyadı</label>
+    <input type="text" asp-for="EmployeeSurname" class="form-control" />
+    <span asp-validation-for="EmployeeSurname" class="text-danger"></span>
+    <br />
+    <label>Perosnel Mail</label>
+    <input type="text" asp-for="EmployeeMail" class="form-control" />
+    <span asp-validation-for="EmployeeMail" class="text-danger"></span>
+    <br />
+    <label>Perosnel Görsel</label>
+    <input type="text" asp-for="EmployeeImage" class="form-control" />
+    <span asp-validation-for="EmployeeImage" class="text-danger"></span>
+    <br />
+    <label>Personel Departmanı</label>
+
+    @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
+    <span asp-validation-for="CategoryID" class="text-danger"></span>
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>
