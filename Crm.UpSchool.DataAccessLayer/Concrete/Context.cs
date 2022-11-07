@@ -1,4 +1,5 @@
 ﻿using Crm.UpSchool.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Crm.UpSchool.DataAccessLayer.Concrete
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<AppUser,AppRole,int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,6 +18,7 @@ namespace Crm.UpSchool.DataAccessLayer.Concrete
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Employee> Employees { get; set; }
  
 
 

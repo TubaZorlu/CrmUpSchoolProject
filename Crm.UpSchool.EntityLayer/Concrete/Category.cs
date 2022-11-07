@@ -14,5 +14,7 @@ namespace Crm.UpSchool.EntityLayer.Concrete
         public string CategoryName { get; set; }
         public string CategoryDecription { get; set; }
 
+        public ICollection<Employee> Employees { get; set; }
+
     }
 }

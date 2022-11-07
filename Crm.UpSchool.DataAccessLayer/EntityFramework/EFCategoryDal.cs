@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Crm.UpSchool.DataAccessLayer.EntityFramework
 {
-    public class EFCategoryDal:GenericRepository<Category>,ICategoryDal
+    public class EFCategoryDal : GenericRepository<Category>, ICategoryDal
     {
-
+       
     }
 }
