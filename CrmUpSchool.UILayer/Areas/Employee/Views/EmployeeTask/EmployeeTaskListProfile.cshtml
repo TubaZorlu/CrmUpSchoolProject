@@ -1,0 +1,39 @@
+﻿@model List<EmployeeTask>
+@{
+    ViewData["Title"] = "EmployeeTaskListProfile";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    int sayac = 0;
+}
+
+<h3>Görevleriniz</h3>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Atama Yapan</th>
+        <th>Başlık</th>
+        <th>Durum</th>
+        <th>Tarih</th>
+        <th>Detaylar</th>
+        <th>Yeni İşlem</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        sayac++;
+        <tr>
+            <td>@sayac</td>
+            <td>@item.AtamaYapanKullanici</td>
+            <td>@item.EmployeeTaskTitle</td>
+            <td>@item.Status</td>
+            <td>@item.Date.ToString("dd.MMM.yyyy")</td>
+        
+            <td><a class="btn btn-outline-warning" asp-controller="EmployeeTaskDetail" asp-action="Index" asp-route-id="@item.EmployeeTaskID">Detaylar</a></td>
+            <td><a href="#" class="btn btn-outline-success">Yeni İşlem</a></td>
+     
+        </tr>
+    }
+
+</table>
+
+@*<a href="/EmployeeTask/Index" class="btn btn-outline-info" style="display:inline-block;inline-size:150px">Geri </a>*@
