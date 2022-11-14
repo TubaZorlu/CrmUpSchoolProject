@@ -20,5 +20,6 @@ namespace Crm.UpSchool.EntityLayer.Concrete
         public Category Category { get; set; }
         public bool EmployeeStatus { get; set; }
 
+
     }
 }

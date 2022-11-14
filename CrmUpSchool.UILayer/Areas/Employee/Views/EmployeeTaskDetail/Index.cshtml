@@ -1,0 +1,28 @@
+﻿@model List<EmployeeTaskDetails>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    int sayac = 0;
+}
+
+
+<h3>Görev  Detayları</h3>
+@if (ViewBag.count == 0)
+{
+    <h3>Bu görev için herhangi bir detay girilmemiştir</h3>
+}
+
+else
+{
+    <div class="card col-6" >
+        <div class="card-header ">
+            @foreach (var item in Model)
+            {
+                sayac++;
+               
+            <div class="card-body"> <label>@sayac .</label>@Html.DisplayFor(x => item.Description)</div>
+
+            }
+        </div>
+    </div>
+}

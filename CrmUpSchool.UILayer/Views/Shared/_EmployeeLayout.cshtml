@@ -1,5 +1,9 @@
 ﻿
-@{ Layout = null; }
+@{
+    Layout = null;
+}
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Crm Admin Paneli</title>
+    <title>Employee paneni</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="~/MajesticAdmin-Free-Bootstrap-Admin-Template-master/template/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/MajesticAdmin-Free-Bootstrap-Admin-Template-master/template/vendors/base/vendor.bundle.base.css">
@@ -176,81 +180,54 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <a class="nav-link" asp-area="Employee" asp-controller="EmployeeTask" asp-action="EmployeeTaskListProfile">
+
                             <i class="mdi mdi-circle-outline menu-icon"></i>
-                            <span class="menu-title">Departmanlar </span>
+                            <span class="menu-title">Görevlerim </span>
                             <i class="menu-arrow"></i>
                         </a>
 
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="../../pages/forms/basic_elements.html">
-                            <i class="mdi mdi-view-headline menu-icon"></i>
-                            <span class="menu-title">Personeller </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Employee" asp-controller="EmployeeDuty" asp-action="Index">
+                        <a class="nav-link" href="../../pages/charts/chartjs.html">
                             <i class="mdi mdi-chart-pie menu-icon"></i>
-                            <span class="menu-title">Görevler</span>
+                            <span class="menu-title">Ayarlar</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Employee" asp-controller="EmployeeDuty" asp-action="Index">
+                        <a class="nav-link" href="../../pages/tables/basic-table.html">
                             <i class="mdi mdi-grid-large menu-icon"></i>
-                            <span class="menu-title">Müşteriler</span>
+                            <span class="menu-title">Mesajlar</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../../pages/icons/mdi.html">
                             <i class="mdi mdi-emoticon menu-icon"></i>
-                            <span class="menu-title">Roller</span>
+                            <span class="menu-title">Bildirimler</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="../../documentation/documentation.html">
                             <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Dosya İşlemleri</span>
+                            <span class="menu-title">Ajanda</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../../documentation/documentation.html">
                             <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Grafikler</span>
+                            <span class="menu-title">Mail Gönder </span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="../../documentation/documentation.html">
                             <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Mail İşlemleri</span>
+                            <span class="menu-title">Çağrı Oluştur </span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../documentation/documentation.html">
-                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Gelen Mesajlar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../documentation/documentation.html">
-                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Giden Mesajlar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../documentation/documentation.html">
-                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title"> Yeni Mesaj </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../documentation/documentation.html">
-                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Api Link</span>
-                        </a>
-                    </li>
+
                 </ul>
             </nav>
             <!-- partial -->
@@ -289,4 +266,12 @@
     <!-- End custom js for this page-->
 </body>
 
+</html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_EmployeeLayout</title>
+</head>
+<body>
+</body>
 </html>

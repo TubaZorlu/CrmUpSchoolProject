@@ -1,0 +1,41 @@
+﻿@model List<EmployeeTask>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CRMLayout.cshtml";
+    int sayac = 0;
+}
+
+<h1>Index</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Atama Yapan</th>
+        <th>Başlık</th>
+        <th>Durum</th>
+        <th>Tarih</th>
+        <th>Personel</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        sayac++;
+        <tr>
+            <td>@sayac</td>
+            <td>@item.AtamaYapanKullanici</td>
+            <td>@item.EmployeeTaskTitle</td>
+            <td>@item.Status</td>
+            <td>@item.Date.ToString("dd.MMM.yyyy")</td>
+            <td>@item.AppUser.Name @item.AppUser.Surname</td>
+            <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="#" class="btn btn-outline-success">Güncelle</a></td>
+            <td><a href="#" class="btn btn-outline-dark">Detaylar</a></td>
+        </tr>
+    }
+
+</table>
+
+<a href="/EmployeeTask/AddTask" class="btn btn-outline-info">Gorev Ekle</a>

@@ -4,14 +4,16 @@ using Crm.UpSchool.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crm.UpSchool.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20221111161812_create_taskemployee")]
+    partial class create_taskemployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,17 +210,14 @@ namespace Crm.UpSchool.DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AtamaYapanKullanici")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
 
                     b.Property<string>("EmployeeTaskTitle")
                         .HasColumnType("nvarchar(max)");
@@ -228,65 +227,9 @@ namespace Crm.UpSchool.DataAccessLayer.Migrations
 
                     b.HasKey("EmployeeTaskID");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("EmployeeID");
 
                     b.ToTable("EmployeeTasks");
-                });
-
-            modelBuilder.Entity("Crm.UpSchool.EntityLayer.Concrete.EmployeeTaskDetails", b =>
-                {
-                    b.Property<int>("EmployeeTaskDetailsID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeTaskID")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmployeeTaskDetailsID");
-
-                    b.HasIndex("EmployeeTaskID");
-
-                    b.ToTable("EmployeeTaskDetails");
-                });
-
-            modelBuilder.Entity("Crm.UpSchool.EntityLayer.Concrete.Message", b =>
-                {
-                    b.Property<int>("MessageID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MessageContent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MessageSubject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReceiverEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReceiverName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SenderEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SenderName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MessageID");
-
-                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -403,24 +346,13 @@ namespace Crm.UpSchool.DataAccessLayer.Migrations
 
             modelBuilder.Entity("Crm.UpSchool.EntityLayer.Concrete.EmployeeTask", b =>
                 {
-                    b.HasOne("Crm.UpSchool.EntityLayer.Concrete.AppUser", "AppUser")
+                    b.HasOne("Crm.UpSchool.EntityLayer.Concrete.Employee", "Employee")
                         .WithMany("EmployeeTasks")
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("Crm.UpSchool.EntityLayer.Concrete.EmployeeTaskDetails", b =>
-                {
-                    b.HasOne("Crm.UpSchool.EntityLayer.Concrete.EmployeeTask", "EmployeeTask")
-                        .WithMany("EmployeeTaskDetails")
-                        .HasForeignKey("EmployeeTaskID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EmployeeTask");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -474,19 +406,14 @@ namespace Crm.UpSchool.DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Crm.UpSchool.EntityLayer.Concrete.AppUser", b =>
-                {
-                    b.Navigation("EmployeeTasks");
-                });
-
             modelBuilder.Entity("Crm.UpSchool.EntityLayer.Concrete.Category", b =>
                 {
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("Crm.UpSchool.EntityLayer.Concrete.EmployeeTask", b =>
+            modelBuilder.Entity("Crm.UpSchool.EntityLayer.Concrete.Employee", b =>
                 {
-                    b.Navigation("EmployeeTaskDetails");
+                    b.Navigation("EmployeeTasks");
                 });
 #pragma warning restore 612, 618
         }
