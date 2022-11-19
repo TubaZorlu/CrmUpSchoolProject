@@ -52,7 +52,8 @@ namespace CrmUpSchool.UILayer
                 AddEntityFrameworkStores<Context>();
 
             services.AddControllersWithViews();
-
+            
+            //kullanıcın sistemem mutlaka giriş yapmasını sağladım tüm sayfalar yasaklı allowannomus dediğim sayfa açılılacak sadece 
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -61,6 +62,7 @@ namespace CrmUpSchool.UILayer
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
+            // allowannomus olan sayfa
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Login/Index";
