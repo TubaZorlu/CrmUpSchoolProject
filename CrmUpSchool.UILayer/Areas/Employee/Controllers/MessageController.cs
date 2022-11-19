@@ -69,24 +69,28 @@ namespace CrmUpSchool.UILayer.Areas.Employee.Controllers
 
             MimeMessage mimeMessage = new MimeMessage();
 
+            //Gönderen mail adresi
             MailboxAddress mailboxAddressFrom = new MailboxAddress("Admin","tubatastan24@gmail.com");
             mimeMessage.From.Add(mailboxAddressFrom);
 
+            //alıcı mail adresi
             MailboxAddress mailboxAddressTo = new MailboxAddress("User",p.ReceiverEmail);
             mimeMessage.To.Add(mailboxAddressTo);
 
+            //Mesajın içeriği
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.TextBody = p.EmailContent;
             mimeMessage.Body = bodyBuilder.ToMessageBody();
 
+            //mesajın konusu
             mimeMessage.Subject = p.EmailSubject;
 
+            //mailin gönderilmesi için protokol 
             SmtpClient client = new SmtpClient();
             client.Connect("smtp.gmail.com", 587, false);
             client.Authenticate("tubatastan24@gmail.com", "ccvxrhibagsunsmm");
             client.Send(mimeMessage);
             client.Disconnect(true);
-
             return View();
         }
 
