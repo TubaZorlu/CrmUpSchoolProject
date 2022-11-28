@@ -42,7 +42,7 @@ namespace CrmUpSchool.UILayer.Areas.Employee.Controllers
             });
 
 
-            return Json(new { jsonList = departmantSalaries });
+            return Json(new { JsonList = departmantSalaries });
         }
     }
 }
