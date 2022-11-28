@@ -40,7 +40,7 @@ namespace CrmUpSchool.UILayer
                 AddEntityFrameworkStores<Context>();
 
             services.AddControllersWithViews();
-            
+
             //kullanıcın sistemem mutlaka giriş yapmasını sağladım tüm sayfalar yasaklı allowannomus dediğim sayfa açılılacak sadece 
             services.AddMvc(config =>
             {
@@ -82,15 +82,23 @@ namespace CrmUpSchool.UILayer
 
             app.UseEndpoints(endpoints =>
             {
-               
+
                 endpoints.MapControllerRoute(
                   name: "areas",
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
 
+
+                endpoints.MapControllerRoute(
+           name: "areas",
+           pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+         );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
+
+
             });
 
 

@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CRMLayout.cshtml";
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<h1>Index</h1>
+
+<h1>Müşteri Ajax Işlemleri</h1>
+<br />
+<button type="button" id="btncustomerList" class="btn btn-outline-dark" style="display:inline-block;inline-size:200px;"> Müşteri Listesi</button>
+<button type="button" id="btncustomerAdd" class="btn btn-outline-primary" style="display:inline-block;inline-size:200px"> Müşteri Ekle</button>
+<button type="button" id="btncustomerGet" class="btn btn-outline-success" style="display:inline-block;inline-size:200px"> Müşteri Getir</button>
+<button type="button" id="btncustomerDelete" class="btn btn-outline-danger" style="display:inline-block;inline-size:200px"> Müşteri Sil</button>
+<button type="button" id="btncustomerUpdate" class="btn btn-outline-warning" style="display:inline-block;inline-size:200px"> Müşteri Güncelle</button>
+<br />
+<br />
+
+
+
+<div id="cusotmerList">
+
+</div>
+
+<br />
+
+<div class="form-group">
+    <input type="text" id="txtcustomername" placeholder="Musteri Adını giriniz"  class=" form-control" />
+    <br />
+    <input type="text" id="txtcustomersurname" placeholder="Musteri Soyadını giriniz" class=" form-control" />
+    <br />
+    <input type="text" id="txtcustomermail" placeholder="Musteri Mailini giriniz"  class=" form-control" />
+    <br />
+    <input type="text" id="txtcustomerphone" placeholder="Musteri Telefonunu giriniz" class=" form-control" />
+    <br />
+</div>
+
+<br />
+
+<div class="form-group">
+    <input type="text" placeholder="aranacak ID giriniz" id="txtid" class="form-control" />
+</div>
+
+<br />
+
+<div id="CustomerGetByID">
+
+
+</div>
+
+<script>
+    $("#btncustomerList").click(function () {
+
+        $.ajax({
+
+            contentType: "application/json",
+            dataType: "json",
+            type: "get",
+            url: "/Admin/AdminCustomer/CustomerListt",
+            success: function (func1) {
+
+                let values = jQuery.parseJSON(func1);
+                console.log(values);
+
+                let tablehtml = "<table class=table table-bordered> <tr><th>Musteri ID</th><th>Musteri Adı</th><th>Musteri Soyadı</th><th>Musteri Mail</th></tr>";
+
+                $.each(values, (index, item) => {
+
+                    tablehtml += `<tr><td>${item.CustomerID}</td> <td>${item.CustomerName}</td> <td>${item.CustomerSurname}</td> <td>${item.CustomerMail}</td></tr>`
+                });
+
+                tablehtml += "</table>";
+                $("#cusotmerList").html(tablehtml);
+
+
+            }
+
+        });
+
+    });
+
+    $("#btncustomerAdd").click(function () {
+
+        let csutomerValues = {
+
+            CustomerName: $("#txtcustomername").val(),
+            CustomerSurname: $("#txtcustomersurname").val(),
+            CustomerMail: $("#txtcustomermail").val(),
+            CustomerPhone: $("#txtcustomerphone").val(),
+
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Admin/AdminCustomer/AddCustomer/",     
+            data: csutomerValues,
+            success: function (func2) {
+                let result = jQuery.parseJSON(func2);
+                alert("Müşteri başarılı bir şekilde eklendi")
+            }
+        });
+    });
+
+    $("#btncustomerGet").click(x => {
+
+        let id = $("#txtid").val();
+
+        $.ajax({
+
+            contentType: "application/json",
+            dataType: "json",
+            type: "get",
+            url: "/Admin/Admincustomer/GetById",
+            data: { customerID: id },
+            success: function (func3) {
+
+                let result = jQuery.parseJSON(func3);
+                console.log(result);
+
+                let tablehtml2 = `<table class=table table-bordered> <tr> <th>musteriID</th> <th>musteri Adı</th> <th>musteri Soyadı</th> </tr> <tr><td>${result.CustomerID}</td> ><td>${result.CustomerName}</td> ><td>${result.CustomerSurname}</td></tr></table>`
+
+                $("#CustomerGetByID").html(tablehtml2);
+            }
+
+        });
+    });
+
+</script>

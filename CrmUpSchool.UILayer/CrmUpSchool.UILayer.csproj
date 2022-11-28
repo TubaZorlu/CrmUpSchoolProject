@@ -33,6 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Employee\Data\" />
     <Folder Include="wwwroot\PdfReport\" />
     <Folder Include="wwwroot\UserImages\" />
