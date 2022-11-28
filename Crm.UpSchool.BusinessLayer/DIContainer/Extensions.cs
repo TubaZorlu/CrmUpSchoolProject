@@ -33,6 +33,9 @@ namespace Crm.UpSchool.BusinessLayer.DIContainer
 
             services.AddScoped<IAnnouncmentService, AnnouncmentManager>();
             services.AddScoped<IAnnouncmentDal, EFAnnouncmentDal>();
+
+            services.AddScoped<ICustomerService, CustomerManager>();
+            services.AddScoped<ICustomerDal, EFCustomerDal>();
         }
 
     }
