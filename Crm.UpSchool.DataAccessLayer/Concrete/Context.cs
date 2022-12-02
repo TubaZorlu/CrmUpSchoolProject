@@ -23,6 +23,7 @@ namespace Crm.UpSchool.DataAccessLayer.Concrete
         public DbSet<EmployeeTaskDetails> EmployeeTaskDetails { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Announcment> Announcments { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
  
 
 

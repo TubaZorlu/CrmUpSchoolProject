@@ -15,7 +15,7 @@
 <button type="button" id="btncustomerGet" class="btn btn-outline-success" style="display:inline-block;inline-size:200px"> Müşteri Getir</button>
 <button type="button" id="btncustomerDelete" class="btn btn-outline-danger" style="display:inline-block;inline-size:200px"> Müşteri Sil</button>
 <button type="button" id="btncustomerUpdate" class="btn btn-outline-warning" style="display:inline-block;inline-size:200px"> Müşteri Güncelle</button>
-<br />
+
 <br />
 
 
@@ -48,6 +48,26 @@
 <div id="CustomerGetByID">
 
 
+</div>
+
+<div >
+
+    <input type="text" class=" form-control" id="txtdeleted" placeholder="silincek ıd" />
+</div>
+
+<br />
+<div>
+    <h4>Güncelelncek bilgiler</h4>
+    <input type="text" class=" form-control" id="txtid" placeholder="guncellencek id" />
+    <br />
+    <input type="text" class=" form-control" id="txtname" placeholder="guncellencek adınız" />
+    <br />
+    <input type="text" class=" form-control" id="txtsoyad" placeholder="guncellencek soyadınız" />
+    <br />
+    <input type="text" class=" form-control" id="txtmail" placeholder="guncellencek mailiniz" />
+    <br />
+    <input type="text" class=" form-control" id="txttelefon" placeholder="guncellencek telefonunuz" />
+    <br />
 </div>
 
 <script>
@@ -124,6 +144,40 @@
                 $("#CustomerGetByID").html(tablehtml2);
             }
 
+        });
+    });
+
+    $("#btncustomerDelete").click(x => {
+
+        let id = $("#txtdeleted").val();
+        $.ajax({
+
+            url: "/Admin/AdminCustomer/DeleteCustomer/" + id,
+            type: "get",
+            contentType: "application/json",
+            success: function (func4) {
+                alert("Müşteri Başarılı Bir Şekilde silindi");
+            }
+
+        });
+    });
+
+    $("#btncustomerUpdate").click(function () {
+        let values = {
+            CustomerID: $("#txtid").val(),
+            CustomerName: $("#txtname").val(),
+            CustomerSurmane: $("#txtsoyad").val(),
+            CustomerPhone: $("#txttelefon").val(),
+            CustomerMail: $("#txtmail").val(),
+        };
+
+        $.ajax({
+
+            type: "get",
+            url: "/Admin/AdminCustomer/UpdateCustomer/",
+            success: function (func5) {
+                alert("güncelleme işlemi yapıldı")
+            }
         });
     });
 
