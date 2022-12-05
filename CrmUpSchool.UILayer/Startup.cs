@@ -6,6 +6,7 @@ using Crm.UpSchool.DataAccessLayer.Concrete;
 using Crm.UpSchool.DataAccessLayer.EntityFramework;
 using Crm.UpSchool.EntityLayer.Concrete;
 using CrmUpSchool.UILayer.Models;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,7 +40,12 @@ namespace CrmUpSchool.UILayer
             services.AddIdentity<AppUser, AppRole>().AddErrorDescriber<CustomIdentityValidator>().
                 AddEntityFrameworkStores<Context>();
 
-            services.AddControllersWithViews();
+            //Automapper için eklenenler
+            services.AddAutoMapper(typeof(Startup));
+            services.CustomizeValidator();
+
+
+            services.AddControllersWithViews().AddFluentValidation();
 
             //kullanıcın sistemem mutlaka giriş yapmasını sağladım tüm sayfalar yasaklı allowannomus dediğim sayfa açılılacak sadece 
             services.AddMvc(config =>
