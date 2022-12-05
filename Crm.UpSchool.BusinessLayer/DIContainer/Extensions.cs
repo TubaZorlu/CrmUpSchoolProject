@@ -1,7 +1,10 @@
 ﻿using Crm.UpSchool.BusinessLayer.Abstract;
 using Crm.UpSchool.BusinessLayer.Concrete;
+using Crm.UpSchool.BusinessLayer.ValidationRules.ContactValidation;
 using Crm.UpSchool.DataAccessLayer.Abstract;
 using Crm.UpSchool.DataAccessLayer.EntityFramework;
+using CrmUpSchool.DTOLayer.ContactDTOs;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -36,6 +39,16 @@ namespace Crm.UpSchool.BusinessLayer.DIContainer
 
             services.AddScoped<ICustomerService, CustomerManager>();
             services.AddScoped<ICustomerDal, EFCustomerDal>();
+
+
+            services.AddScoped<IContactService, ContactManager>();
+            services.AddScoped<IContactDal, EFContactDal>();
+        }
+
+        public static void CustomizeValidator(this IServiceCollection services) 
+        {
+            services.AddTransient<IValidator<ContactAddDto>,ContactAddValidator> ();
+            services.AddTransient<IValidator<ContactUpdateDto>,ContactUpdateValidator> ();
         }
 
     }
