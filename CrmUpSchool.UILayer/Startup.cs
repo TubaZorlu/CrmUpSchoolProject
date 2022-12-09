@@ -37,6 +37,7 @@ namespace CrmUpSchool.UILayer
             services.ContainerDependencies();
 
             services.AddDbContext<Context>();
+
             services.AddIdentity<AppUser, AppRole>().AddErrorDescriber<CustomIdentityValidator>().
                 AddEntityFrameworkStores<Context>();
 

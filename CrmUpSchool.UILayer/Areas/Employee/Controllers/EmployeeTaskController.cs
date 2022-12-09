@@ -24,6 +24,7 @@ namespace CrmUpSchool.UILayer.Areas.Employee.Controllers
         public async Task<IActionResult> EmployeeTaskListProfile()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
+
             var taskList=_employeeTaskService.TGEtEmployeeTaskByID(values.Id);
             return View(taskList);
         }
