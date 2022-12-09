@@ -1,5 +1,6 @@
 ﻿using Crm.UpSchool.EntityLayer.Concrete;
 using CrmUpSchool.UILayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,13 +10,17 @@ using System.Threading.Tasks;
 
 namespace CrmUpSchool.UILayer.Controllers
 {
+    [AllowAnonymous]
     public class RoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public RoleController(RoleManager<AppRole> roleManager)
+        public RoleController(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
+
         }
 
         public IActionResult Index()
@@ -70,6 +75,60 @@ namespace CrmUpSchool.UILayer.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdateRole(int id)
+        {
+            var values = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
+            return View(values);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateRole(AppRole appRole)
+        {
+            var values = _roleManager.Roles.FirstOrDefault(x => x.Id == appRole.Id);
+            values.Name = appRole.Name;
+            //values.NormalizedName = appRole.NormalizedName;
+            var result = await _roleManager.UpdateAsync(values);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+
+        
+        
+        public IActionResult UserList()
+        {
+            var values = _userManager.Users.ToList();
+            return View(values);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AssignRole(int id) 
+        {
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
+            var roles = _roleManager.Roles.ToList();
+            TempData["UserID"] = user.Id;
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            List<RoleAssignViewModel> models = new List<RoleAssignViewModel>();
+
+            foreach (var item in roles)
+            {
+                RoleAssignViewModel roleAssignViewModel = new RoleAssignViewModel();
+                roleAssignViewModel.Name = item.Name;
+                roleAssignViewModel.RoleID = item.Id;
+                roleAssignViewModel.Exists = userRoles.Contains(item.Name);
+                models.Add(roleAssignViewModel);
+                
+            }
+
+            return View(models);
         }
 
     }

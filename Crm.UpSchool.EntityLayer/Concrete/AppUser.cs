@@ -13,6 +13,7 @@ namespace Crm.UpSchool.EntityLayer.Concrete
         public string Surname { get; set; }
         public string ImageURL { get; set; }
         public string Gender { get; set; }
+        public string Code { get; set; }
         public List<EmployeeTask> EmployeeTasks { get; set; }
     }
 }

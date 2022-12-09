@@ -32,9 +32,8 @@ namespace CrmUpSchool.UILayer.Controllers
         {
             var result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.PasswordHash, false, true);
 
-            if (result.Succeeded)
-            {
-               
+            if (result.Succeeded && appUser.EmailConfirmed==true)
+            {               
                 return RedirectToAction("Index", "User");
             }
 
