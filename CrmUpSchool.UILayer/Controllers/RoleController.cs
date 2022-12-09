@@ -131,5 +131,26 @@ namespace CrmUpSchool.UILayer.Controllers
             return View(models);
         }
 
+        public async Task<IActionResult> AssignRole(List<RoleAssignViewModel> model) 
+        {
+            var userid = (int)TempData["UserID"];
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == userid);
+
+            foreach (var item in model)
+            {
+                if (item.Exists)
+                {
+                    await _userManager.AddToRoleAsync(user, item.Name);
+                }
+                else
+                {
+                    await _userManager.RemoveFromRoleAsync(user, item.Name);
+
+                }
+            }
+
+            return RedirectToAction("UserList");
+        }
+
     }
 }
